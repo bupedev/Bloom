@@ -1,46 +1,24 @@
-﻿using System.CommandLine;
+﻿using Bloom.CLI;
+using Bloom.CLI.Commands;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var rootCommand = new RootCommand("Bloom Command Line Interface");
+// Dependency injection configuration
+using var host = Host
+    .CreateDefaultBuilder(args)
+    .ConfigureServices(services => {
+            // Register the core command service (entry point for the program)
+            services.AddScoped<CommandService>();
 
-// Lexing (scanning) command configuration.
-var lexCommand = new Command("lex", "Lex (scan) Bloomish code.");
+            // Register all command modules automatically
+            foreach (var commandModuleType in ReflectionUtils.GetImplementingTypes<ICommandModule>())
+                services.AddScoped(typeof(ICommandModule), commandModuleType);
+        }
+    )
+    .Build();
 
-var fileOption = new Option<FileInfo>(
-    ["-f", "--file"],
-    "A file containing Bloomish code to be lexed."
-).ExistingOnly();
-
-lexCommand.AddOption(fileOption);
-
-var codeOption = new Option<string>(
-    ["-c", "--code"],
-    "In-line Bloomish code to be lexed. If provided, the \"file\" argument will be ignored."
-);
-lexCommand.AddOption(codeOption);
-
-lexCommand.AddValidator(result => {
-        var hasFile = result.GetValueForOption(fileOption) is not null;
-        var hasCode = result.GetValueForOption(codeOption) is not null;
-        if (hasFile == hasCode) result.ErrorMessage = "Specify exactly one of '--file' or '--code'.";
-    }
-);
-
-lexCommand.SetHandler(
-    (code, file) => {
-        var source = !string.IsNullOrEmpty(code) ? code : File.ReadAllText(file.FullName);
-
-        Console.WriteLine($"Provided code: {source}");
-        // TODO: Add seam to lexing code...
-    },
-    codeOption,
-    fileOption
-);
-
-rootCommand.Add(lexCommand);
-
-rootCommand.SetHandler(() => {
-        Console.WriteLine("Welcome to the Bloom Command Line Interface! Functionality coming soon!");
-    }
-);
-
-return await rootCommand.InvokeAsync(args);
+// Resolve the command service and process the arguments
+return await host
+    .Services
+    .GetRequiredService<CommandService>()
+    .Process(args);
