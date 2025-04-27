@@ -1,11 +1,12 @@
 ﻿using System.CommandLine;
+using Bloom.Language;
 
 namespace Bloom.CLI.Commands;
 
 /// <summary>
 /// Module for a command that will lex Bloomish code into a series of tokens.
 /// </summary>
-internal sealed class LexerCommand : ICommandModule {
+internal sealed class LexerCommand(ILexer lexer) : ICommandModule {
     /// <inheritdoc />
     public Command Build() {
         var command = new Command("lex", "Lex (scan) Bloomish code to generate an equivalent series of tokens");
@@ -32,14 +33,12 @@ internal sealed class LexerCommand : ICommandModule {
             }
         );
 
-        // Handle the command by calling into the language library and formatting the output (TBC...)
+        // Handle the command by calling into the language library and formatting the output
         command.SetHandler(
             (code, file) => {
                 var source = !string.IsNullOrEmpty(code) ? code : File.ReadAllText(file.FullName);
 
-                Console.WriteLine($"Provided code: {source}");
-
-                // TODO: Add seam to lexing code...
+                foreach (var token in lexer.GenerateTokens(source)) Console.WriteLine($"Provided code: {source}");
             },
             codeOption,
             fileOption

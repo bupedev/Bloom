@@ -1,5 +1,7 @@
 ﻿using Bloom.CLI;
 using Bloom.CLI.Commands;
+using Bloom.CLI.Output;
+using Bloom.Language;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,6 +15,9 @@ using var host = Host
             // Register all command modules automatically
             foreach (var commandModuleType in ReflectionUtils.GetImplementingTypes<ICommandModule>())
                 services.AddScoped(typeof(ICommandModule), commandModuleType);
+
+            // Register language services
+            services.AddScoped<ILexer, Lexer>();
         }
     )
     .Build();
