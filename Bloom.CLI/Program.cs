@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.CommandLine;
 
-Console.WriteLine("Hello, World!");
+var rootCommand = new RootCommand("Bloom Command Line Interface");
+
+rootCommand.SetHandler(() =>
+{
+    Console.WriteLine("Welcome to the Bloom Command Line Interface! Functionality coming soon!");
+});
+
+return await rootCommand.InvokeAsync(args);
