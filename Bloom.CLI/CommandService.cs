@@ -7,9 +7,11 @@ namespace Bloom.CLI;
 /// Core service for orchestrating commands in the command-line interface.
 /// </summary>
 internal sealed class CommandService {
+    private readonly IConsole _console;
     private readonly Command _rootCommand;
 
-    public CommandService(IEnumerable<ICommandModule> commandModules) {
+    public CommandService(IConsole console, IEnumerable<ICommandModule> commandModules) {
+        _console = console;
         _rootCommand = new RootCommand("All-in-one command-line toolkit for Bloomish language development");
 
         // Add each of the registered command modules to the root command.
@@ -25,6 +27,6 @@ internal sealed class CommandService {
     /// code upon completion.
     /// </returns>
     public Task<int> Process(string[] args) {
-        return _rootCommand.InvokeAsync(args);
+        return _rootCommand.InvokeAsync(args, _console);
     }
 }
