@@ -1,5 +1,5 @@
 ﻿using System.CommandLine;
-using Bloom.CLI.FIleSystem;
+using Bloom.CLI.FileSystem;
 using Bloom.Language;
 
 namespace Bloom.CLI.Commands;

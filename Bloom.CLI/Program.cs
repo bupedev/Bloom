@@ -2,7 +2,7 @@
 using System.CommandLine.IO;
 using Bloom.CLI;
 using Bloom.CLI.Commands;
-using Bloom.CLI.FIleSystem;
+using Bloom.CLI.FileSystem;
 using Bloom.Language;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

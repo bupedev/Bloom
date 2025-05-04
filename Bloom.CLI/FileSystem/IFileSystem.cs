@@ -1,4 +1,4 @@
-namespace Bloom.CLI.FIleSystem;
+namespace Bloom.CLI.FileSystem;
 
 /// <summary>
 /// Abstraction for file system operations.

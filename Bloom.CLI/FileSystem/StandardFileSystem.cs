@@ -1,4 +1,4 @@
-namespace Bloom.CLI.FIleSystem;
+namespace Bloom.CLI.FileSystem;
 
 /// <summary>
 /// Handles file system operations via the system library.
