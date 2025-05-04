@@ -7,7 +7,7 @@ namespace Bloom.CLI.Commands;
 /// <summary>
 /// Module for a command that will lex Bloomish code into a series of tokens.
 /// </summary>
-internal sealed class LexerCommand(IConsole console, IFileSystem fileSystem, ILexer lexer) : ICommandModule {
+internal sealed class LexerCommandModule(IConsole console, IFileSystem fileSystem, ILexer lexer) : ICommandModule {
     /// <inheritdoc />
     public Command Build() {
         var command = new Command("lex", "Lex (scan) Bloomish code to generate an equivalent series of tokens");
@@ -31,14 +31,14 @@ internal sealed class LexerCommand(IConsole console, IFileSystem fileSystem, ILe
                 var hasFile = result.GetValueForOption(fileOption) is not null;
                 var hasCode = result.GetValueForOption(codeOption) is not null;
 
-                if (hasFile == hasCode) result.ErrorMessage = "Specify exactly one of '--file' or '--code'";
+                if (hasFile == hasCode) result.ErrorMessage = "Specify exactly one of '--file' or '--code'.";
             }
         );
 
         //  Validate that if '--file' is in use, the provided filepath is valid.
         command.AddValidator(result => {
                 if (result.GetValueForOption(fileOption) is not { } path) return;
-                if (fileSystem.FileExists(path)) result.ErrorMessage = $"No file exists at the path: {path}";
+                if (!fileSystem.FileExists(path)) result.ErrorMessage = $"No file exists at the path: {path}";
             }
         );
 
