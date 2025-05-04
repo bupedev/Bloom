@@ -4,6 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bloom.CLI", "Bloom.CLI\Bloo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bloom.Language", "Bloom.Language\Bloom.Language.csproj", "{4DB4176D-58BE-4CA9-81DD-20246A44DFC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bloom.CLI.Tests", "Bloom.CLI.Tests\Bloom.CLI.Tests.csproj", "{29A42488-1502-4CD0-AF49-2FA1977D7A3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{12D95E9D-EC9C-414F-BCE3-0EC21FB99249}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +25,9 @@ Global
 		{4DB4176D-58BE-4CA9-81DD-20246A44DFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DB4176D-58BE-4CA9-81DD-20246A44DFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DB4176D-58BE-4CA9-81DD-20246A44DFC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A42488-1502-4CD0-AF49-2FA1977D7A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A42488-1502-4CD0-AF49-2FA1977D7A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A42488-1502-4CD0-AF49-2FA1977D7A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A42488-1502-4CD0-AF49-2FA1977D7A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

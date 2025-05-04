@@ -1,0 +1,7 @@
+<Project>
+    <!-- Non-test project build rules -->
+    <ItemGroup Condition="'$(IsTestProject)' != 'true'">
+        <!-- Make internals visible to the test assembly of the same name -->
+        <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
+    </ItemGroup>
+</Project>
