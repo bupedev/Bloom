@@ -1,7 +1,8 @@
-﻿using Bloom.CLI;
+﻿using System.CommandLine;
+using System.CommandLine.IO;
+using Bloom.CLI;
 using Bloom.CLI.Commands;
 using Bloom.CLI.FIleSystem;
-using Bloom.CLI.Output;
 using Bloom.Language;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +12,7 @@ using var host = Host
     .CreateDefaultBuilder(args)
     .ConfigureServices(services => {
             // Register the system library abstractions
-            services.AddScoped<IOutputWriter, ConsoleWriter>();
+            services.AddScoped<IConsole, SystemConsole>();
             services.AddScoped<IFileSystem, StandardFileSystem>();
 
             // Register the core command service (entry point for the program)

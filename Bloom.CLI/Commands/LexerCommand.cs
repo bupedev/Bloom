@@ -1,6 +1,5 @@
 ﻿using System.CommandLine;
 using Bloom.CLI.FIleSystem;
-using Bloom.CLI.Output;
 using Bloom.Language;
 
 namespace Bloom.CLI.Commands;
@@ -8,7 +7,7 @@ namespace Bloom.CLI.Commands;
 /// <summary>
 /// Module for a command that will lex Bloomish code into a series of tokens.
 /// </summary>
-internal sealed class LexerCommand(IOutputWriter output, IFileSystem fileSystem, ILexer lexer) : ICommandModule {
+internal sealed class LexerCommand(IConsole console, IFileSystem fileSystem, ILexer lexer) : ICommandModule {
     /// <inheritdoc />
     public Command Build() {
         var command = new Command("lex", "Lex (scan) Bloomish code to generate an equivalent series of tokens");
@@ -48,7 +47,7 @@ internal sealed class LexerCommand(IOutputWriter output, IFileSystem fileSystem,
             (inlineCode, filePath) => {
                 var source = !string.IsNullOrEmpty(inlineCode) ? inlineCode : fileSystem.FileReadAllText(filePath);
 
-                foreach (var token in lexer.GenerateTokens(source)) output.WriteLine(token.ToString());
+                foreach (var token in lexer.GenerateTokens(source)) console.WriteLine(token.ToString());
             },
             codeOption,
             fileOption
