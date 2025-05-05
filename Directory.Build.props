@@ -1,4 +1,8 @@
 <Project>
+    <PropertyGroup>
+        <Version>0.1.0</Version>
+    </PropertyGroup>
+    
     <!-- Non-test project build rules -->
     <ItemGroup Condition="'$(IsTestProject)' != 'true'">
         <!-- Make internals visible to the test assembly of the same name -->
