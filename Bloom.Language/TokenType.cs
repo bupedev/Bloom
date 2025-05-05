@@ -5,11 +5,6 @@ namespace Bloom.Language;
 /// </summary>
 public enum TokenType {
     /// <summary>
-    /// The end of a statement.
-    /// </summary>
-    Terminator,
-
-    /// <summary>
     /// The transition from a symbol to some sequence of symbols inside a rule statement.
     /// </summary>
     Transition,
