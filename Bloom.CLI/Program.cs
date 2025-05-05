@@ -15,12 +15,9 @@ using var host = Host
             services.AddScoped<IConsole, SystemConsole>();
             services.AddScoped<IFileSystem, StandardFileSystem>();
 
-            // Register the core command service (entry point for the program)
+            // Register the core command service (entry point for the program) and command modules
             services.AddScoped<CommandService>();
-
-            // Register all command modules automatically
-            foreach (var commandModuleType in ReflectionUtils.GetImplementingTypes<ICommandModule>())
-                services.AddScoped(typeof(ICommandModule), commandModuleType);
+            services.AddScoped<ICommandModule, LexerCommandModule>();
 
             // Register language services
             services.AddScoped<ILexer, Lexer>();
