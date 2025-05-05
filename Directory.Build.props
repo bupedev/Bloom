@@ -2,6 +2,6 @@
     <!-- Non-test project build rules -->
     <ItemGroup Condition="'$(IsTestProject)' != 'true'">
         <!-- Make internals visible to the test assembly of the same name -->
-        <InternalsVisibleTo Include="$(AssemblyName).Tests;DynamicProxyGenAssembly2"/>
+        <InternalsVisibleTo Include="$(RootNamespace).Tests;DynamicProxyGenAssembly2"/>
     </ItemGroup>
 </Project>

@@ -4,7 +4,9 @@
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
         <PublishAot>true</PublishAot>
+        <AssemblyName>bloom</AssemblyName>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Bloom.CLI</RootNamespace>
         <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>
 
