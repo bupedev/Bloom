@@ -26,6 +26,8 @@ public sealed class Lexer : ILexer {
                 iterator.Next();
                 var token = ScanToken(iterator);
                 if (token is not null) yield return token;
+
+                // TODO: Somehow handle characters not supported by Bloomish without ignoring...
             }
 
             yield return new Token(EndOfFile, string.Empty);
